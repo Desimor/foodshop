@@ -77,6 +77,20 @@ server.post('/food', function(req, res){
     });
 });
 
+server.put('/food/:id', function(req, res){
+    Food.findOneAndUpdate({_id: req.params.id}, req.body, function(err, document){
+        if(err){
+            res.status(500).json({
+                msg: err
+            });
+        } else {
+            res.status(200).json({
+                msg: 'Successfull updated!'
+            });
+        }
+    });
+});
+
 server.delete('/food/:id', function(req, res){
     Food.remove({_id: req.params.id}, function(err, document){
         if(err){

@@ -62,6 +62,20 @@ server.get('/food/:id', function(req, res){
     });
 });
 
+server.get('/food/category/:categoryName', function(req, res){
+    Food.find({category: req.params.categoryName}, function(err, documents){
+        if(err){
+            res.status(500).json({
+                msg: err
+            });
+        } else {
+            res.status(200).json({
+                food: documents
+            });
+        }
+    });
+});
+
 server.post('/food', function(req, res){
     var food = new Food(req.body);
     food.save(function(err, document){

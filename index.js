@@ -133,6 +133,20 @@ server.delete('/food/:id', function(req, res){
     });
 });
 
+server.delete('/food/category/:category', function(req, res){
+    Food.remove({category: req.params.category}, function(err, document){
+        if(err){
+            res.status(500).json({
+                msg: err
+            });
+        } else {
+            res.status(200).json({
+                msg: 'Successfully deleted category!'
+            });
+        }
+    });
+});
+
 server.listen(port, function(){
     console.log("Now listening on port...", port);
 })

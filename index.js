@@ -62,6 +62,20 @@ server.get('/food/:id', function(req, res){
     });
 });
 
+server.get('/food/price/:dollarAmount', function(req, res){
+    Food.find({price: req.params.dollarAmount}, function(err, documents){
+        if(err){
+            res.status(500).json({
+                msg: err
+            });
+        } else {
+            res.status(200).json({
+                food: documents
+            });
+        }
+    });
+});
+
 server.get('/food/category/:categoryName', function(req, res){
     Food.find({category: req.params.categoryName}, function(err, documents){
         if(err){
